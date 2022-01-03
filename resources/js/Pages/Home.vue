@@ -1,14 +1,9 @@
 <template>
-  <h1 class="text-4xl">Home</h1>
-  <Nav />
+    <h1 class="text-3xl">Home</h1>
 </template>
 
 <script>
-import Nav from "../Shared/Nav";
-export default {
-  components: { Nav },
-};
+export default {};
 </script>
 
-<style>
-</style>
+<style></style>

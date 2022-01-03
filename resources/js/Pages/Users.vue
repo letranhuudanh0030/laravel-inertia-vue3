@@ -1,14 +1,13 @@
 <template>
-  <h1>Users</h1>
-  <Nav />
+    <h1>Users</h1>
+    <div style="margin-top: 400px">
+        <p>The current time is {{ time }}</p>
+        <Link href="/users" class="text-blue-500" preserve-scroll>Refresh</Link>
+    </div>
 </template>
 
 <script>
-import Nav from "../Shared/Nav";
-export default {
-  components: { Nav },
-};
+export default {};
 </script>
 
-<style>
-</style>
+<style></style>
