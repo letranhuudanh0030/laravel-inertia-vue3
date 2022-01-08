@@ -1,7 +1,15 @@
 <template>
     <Head title="Users" />
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl">Users</h1>
+        <div class="flex items-center">
+            <h1 class="text-3xl">Users</h1>
+            <Link
+                v-if="can.createUser"
+                href="/users/create"
+                class="text-blue-500 text-sm ml-2"
+                >New user</Link
+            >
+        </div>
         <input
             v-model="search"
             type="text"
@@ -36,6 +44,7 @@
                                 </td>
 
                                 <td
+                                    v-if="user.can.edit"
                                     class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
                                 >
                                     <Link
@@ -59,18 +68,22 @@
 </template>
 
 <script setup>
-import Pagination from "../Shared/Pagination";
+import Pagination from "../../Shared/Pagination.vue";
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
-let props = defineProps({ users: Object, filters: Object });
+import debounce from "lodash/debounce";
+let props = defineProps({ users: Object, filters: Object, can: Object });
 let search = ref(props.filters.search);
-watch(search, (value) => {
-    Inertia.get(
-        "/users",
-        { search: value },
-        { preserveState: true, replace: true }
-    );
-});
+watch(
+    search,
+    debounce((value) => {
+        Inertia.get(
+            "/users",
+            { search: value },
+            { preserveState: true, replace: true }
+        );
+    }, 300)
+);
 </script>
 
 <style></style>
